@@ -2,7 +2,7 @@ import styles from '../styles/dog.module.css';
 import { DogType } from './Csr';
 
 export const getDogs = async () => {
-    const data = await fetch('http://localhost:3000/todos');
+    const data = await fetch('http://localhost:3000/todos', { cache: 'force-cache' });
     const result = await data.json();
     return result;
 };
