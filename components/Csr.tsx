@@ -1,38 +1,43 @@
 'use client';
 
-import styles from '../styles/movie.module.css';
+import styles from '../styles/dog.module.css';
 import { useEffect, useState } from 'react';
-import { MovieType } from '@/app/utils/movie';
+
+export type DogType = {
+    id: string;
+    img: string;
+    name: string;
+    age: number;
+};
 
 const Csr = () => {
-    const [data, setData] = useState<MovieType[]>();
+    const [datas, setDatas] = useState<DogType[]>();
 
-    const getPost = async () => {
-        const data = await fetch('https://nomad-movies.nomadcoders.workers.dev/movies');
+    const getDogs = async () => {
+        const data = await fetch('http://localhost:3000/todos');
+
         if (!data.ok) {
-            throw Error('Error Fetched');
+            throw Error('Fetched Error...');
         }
 
         const result = await data.json();
-        setData(result);
+        setDatas(result);
     };
 
     useEffect(() => {
-        getPost();
+        getDogs();
     }, []);
 
     return (
         <div className={styles.layout}>
-            <h1 className={styles.title}>Movie List</h1>
-            <div className={styles.movie}>
-                {data?.map((movie) => (
-                    <div key={movie.id}>
-                        <img src={movie.poster_path} alt={movie.title} width={450} height={450} />
-                        <div className={styles.subtitle}>{movie.title}</div>
-                        <p>{movie.overview}</p>
-                    </div>
-                ))}
-            </div>
+            <h1 className={styles.title}>강아지 리스트</h1>
+            {datas?.map((dog) => (
+                <li key={dog.id} className={styles.item}>
+                    <img src={dog.img} alt={dog.name} width={300} height={300} />
+                    <span>{dog.name}</span>
+                    <span>{dog.age}세</span>
+                </li>
+            ))}
         </div>
     );
 };

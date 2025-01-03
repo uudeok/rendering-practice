@@ -2,12 +2,12 @@ import styles from '../styles/dog.module.css';
 import { DogType } from './Csr';
 
 export const getDogs = async () => {
-    const data = await fetch('http://localhost:3000/todos', { cache: 'no-store' });
+    const data = await fetch('http://localhost:3000/todos', { next: { revalidate: 10 } });
     const result = await data.json();
     return result;
 };
 
-const Ssr = async () => {
+const Isr = async () => {
     const dogs = await getDogs();
 
     return (
@@ -24,4 +24,4 @@ const Ssr = async () => {
     );
 };
 
-export default Ssr;
+export default Isr;

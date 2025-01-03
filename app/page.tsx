@@ -7,6 +7,8 @@ export default function Home() {
             <h1 className={styles.title}>Rendering</h1>
             <Link href="/CSR">CSR</Link>
             <Link href="/SSR">SSR</Link>
+            <Link href="/ISR">ISR</Link>
+            <Link href="/SSG">SSG</Link>
         </div>
     );
 }
