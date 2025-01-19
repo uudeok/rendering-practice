@@ -1,8 +1,9 @@
+import { BaseUrl } from '@/constant/url';
 import styles from '../styles/dog.module.css';
 import { DogType } from './Csr';
 
 export const getDogs = async () => {
-    const data = await fetch('http://localhost:3000/todos', { cache: 'force-cache' });
+    const data = await fetch(BaseUrl, { cache: 'force-cache' });
     const result = await data.json();
     return result;
 };
